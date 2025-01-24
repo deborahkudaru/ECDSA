@@ -1,19 +1,19 @@
 // generate public and private key, and address using ecdsa 
 
 // STEP 1
-let keyPair = await window.crypto.subtle.generateKey(
-    {
-        name: "RSA-OAEP",
-        modulusLength: 4096,
-        publicExponent: new Uint8Array([1, 0, 1]),
-        hash: "SHA-256"
-    },
-    true,
-    ["encrypt", "decrypt"],
-);
-const privateKey = keyPair.privateKey;
+// let keyPair = await window.crypto.subtle.generateKey(
+//     {
+//         name: "RSA-OAEP",
+//         modulusLength: 4096,
+//         publicExponent: new Uint8Array([1, 0, 1]),
+//         hash: "SHA-256"
+//     },
+//     true,
+//     ["encrypt", "decrypt"],
+// );
+// const privateKey = keyPair.privateKey;
 
-console.log(privateKey)
+// console.log(privateKey)
 
 // function createAddress(gPoint, PRK) {
 //     // let generatorPoint = ["x", "y"]
@@ -29,7 +29,13 @@ console.log(privateKey)
 
 // console.log()
 
+let prk = Math.floor(Math.random() * (1.158 * 10 ** 77));
+let prkToHex =  Math.abs(prk).toString(16);
+let gPoint =10
+let publicKey = Math.abs(prk * gPoint).toString(16)
 
-function createPrivateKey(){
-    let prk = Math.floor(Math.random() * 10)
+function createAddress(){
+    return `0x${publicKey.slice(45)}`
 }
+
+console.log(createAddress())
